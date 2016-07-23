@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw The Chart</title>
+    <link rel="stylesheet" href="drawthechart.css">
+</head>
+<body>
+  <h1>Draw The Chart</h1>
+  <div class="container">
+    <p class="text">
+    Field:
+      doubleclick - to add new point,
+      right button click - to remove point.
+    Points magnits to grid.
+    Click "Get speading data" button to see spreading array.
+    Also, It will be logged in console (F12).
+    </p>
+  </div>
+  <label>Set the count of points</label>
+  <input type="number" id="period">
+  <div class="container">
+  <div class="manual_chart">
+    <svg id="chart_input"></svg>
+  </div>
+</div>
+<div class="container">
+  <button id="result">Get spreading array</button>
+  <div id="result-container"></div>
+</div>
+
+  <script src="drawthechart.js"></script>
+  <script>
+  var svg = document.getElementById("chart_input"),
+      div = document.getElementById("manual_chart"),
+      period = document.getElementById("period"),
+      resultContainer = document.getElementById("result-container");
+  var manualSpreading = new DrawingChart(svg, period.value);
+
+  // period.onkeydown = function (e) {
+  //   if (e)
+  // }
+  period.onkeyup = function () {
+    manualSpreading = new DrawingChart(svg, period.value);
+  };
+
+  result.onclick = function () {
+    var data = manualSpreading.getData();
+    resultContainer.innerText = data;
+    console.log(data);
+  };
+  </script>
+
+</body>
+</html>
